@@ -1,5 +1,6 @@
 FROM phusion/baseimage:latest
 MAINTAINER Daniel Graziotin <daniel@ineed.coffee>
+ENV REFRESHED_AT 2016-03-28
 
 # based on tutumcloud/tutum-docker-lamp
 # MAINTAINER Fernando Mayo <fernando@tutum.co>, Feng Honglin <hfeng@tutum.co>
@@ -44,9 +45,9 @@ ADD create_mysql_users.sh /create_mysql_users.sh
 RUN chmod 755 /*.sh
 
 # Add phpmyadmin
-RUN wget -O /tmp/phpmyadmin.tar.gz http://downloads.sourceforge.net/project/phpmyadmin/phpMyAdmin/4.3.12/phpMyAdmin-4.3.12-all-languages.tar.gz
+RUN wget -O /tmp/phpmyadmin.tar.gz https://files.phpmyadmin.net/phpMyAdmin/4.6.0/phpMyAdmin-4.6.0-all-languages.tar.gz
 RUN tar xfvz /tmp/phpmyadmin.tar.gz -C /var/www
-RUN ln -s /var/www/phpMyAdmin-4.3.12-all-languages /var/www/phpmyadmin
+RUN ln -s /var/www/phpMyAdmin-4.6.0-all-languages /var/www/phpmyadmin
 RUN mv /var/www/phpmyadmin/config.sample.inc.php /var/www/phpmyadmin/config.inc.php
 
 ENV MYSQL_PASS:-$(pwgen -s 12 1)
