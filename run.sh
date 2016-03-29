@@ -7,6 +7,10 @@ sed -ri -e "s/^upload_max_filesize.*/upload_max_filesize = ${PHP_UPLOAD_MAX_FILE
 
 sed -i "s/export APACHE_RUN_GROUP=www-data/export APACHE_RUN_GROUP=staff/" /etc/apache2/envvars
 
+if [ -n "$APACHE_ROOT" ];then
+    rm -f /var/www/html && ln -s "/app/${APACHE_ROOT}" /var/www/html
+fi
+
 sed -i -e "s/cfg\['blowfish_secret'\] = ''/cfg['blowfish_secret'] = '`date | md5sum`'/" /var/www/phpmyadmin/config.inc.php
 
 if [ -n "$VAGRANT_OSX_MODE" ];then
