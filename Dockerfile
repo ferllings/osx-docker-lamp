@@ -1,6 +1,6 @@
 FROM phusion/baseimage:latest
 MAINTAINER Daniel Graziotin <daniel@ineed.coffee>
-ENV REFRESHED_AT 2016-03-28
+ENV REFRESHED_AT 2016-03-29
 
 # based on tutumcloud/tutum-docker-lamp
 # MAINTAINER Fernando Mayo <fernando@tutum.co>, Feng Honglin <hfeng@tutum.co>
