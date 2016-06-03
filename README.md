@@ -104,6 +104,7 @@ has full write permissions to the `app` folder.
 
 Apache is pretty much standard in this image. It is configured to serve the Web app
 at `app` as `/` and phpMyAdmin as `/phpmyadmin`. Mod rewrite is enabled.
+To serve the Web app from a directory within `/app/` set the APACHE_ROOT environment variable. ie. if `APACHE_ROOT=web` then `/app/web` will be served by apache.
 
 Apache runs as user www-data and group staff. The write support works because the
 user www-data is configured to have the same user id as the one employed by boot2docker (1000).
@@ -167,6 +168,7 @@ the the `MYSQL_USER_*` variables, explained below.
 
 ##Environment variables
 
+- `APACHE_ROOT` tells Apache which folder within the app volume so serve as the web root.
 - `MYSQL_ADMIN_PASS="mypass"` will use your given MySQL password for the `admin`
 user instead of the random one.
 - `CREATE_MYSQL_BASIC_USER_AND_DB="true"` will create the user `user` with db `db` and password `password`. Not needed if using one of the following three `MYSQL_USER_*` variables
@@ -175,9 +177,9 @@ user instead of the random one.
 - `MYSQL_USER_PASS="supersecretpassword"` will use your given password  instead of `password`
 - `PHP_UPLOAD_MAX_FILESIZE="10M"` will change PHP upload_max_filesize config value
 - `PHP_POST_MAX_SIZE="10M"` will change PHP post_max_size config value
--`VAGRANT_OSX_MODE="true"` for enabling Vagrant-compatibility
--`DOCKER_USER_ID=$(id -u)` for letting Vagrant use your host user ID for mounted folders
--`DOCKER_USER_GID=$(id -g)` for letting Vagrant use your host user GID for mounted folders
+- `VAGRANT_OSX_MODE="true"` for enabling Vagrant-compatibility
+- `DOCKER_USER_ID=$(id -u)` for letting Vagrant use your host user ID for mounted folders
+- `DOCKER_USER_GID=$(id -g)` for letting Vagrant use your host user GID for mounted folders
 
 Set these variables using the `-e` flag when invoking the `docker` client.
 
