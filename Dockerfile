@@ -44,12 +44,6 @@ RUN rm -rf /var/lib/mysql
 ADD create_mysql_users.sh /create_mysql_users.sh
 RUN chmod 755 /*.sh
 
-# Add phpmyadmin
-RUN wget -O /tmp/phpmyadmin.tar.gz https://files.phpmyadmin.net/phpMyAdmin/4.6.0/phpMyAdmin-4.6.0-all-languages.tar.gz
-RUN tar xfvz /tmp/phpmyadmin.tar.gz -C /var/www
-RUN ln -s /var/www/phpMyAdmin-4.6.0-all-languages /var/www/phpmyadmin
-RUN mv /var/www/phpmyadmin/config.sample.inc.php /var/www/phpmyadmin/config.inc.php
-
 ENV MYSQL_PASS:-$(pwgen -s 12 1)
 # config to enable .htaccess
 ADD apache_default /etc/apache2/sites-available/000-default.conf
@@ -66,5 +60,5 @@ ENV PHP_POST_MAX_SIZE 10M
 # Add volumes for the app and MySql
 VOLUME  ["/etc/mysql", "/var/lib/mysql", "/app" ]
 
-EXPOSE 80 3306
+EXPOSE 80 81 3306
 CMD ["/run.sh"]
